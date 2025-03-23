@@ -13,5 +13,5 @@ class TransactionAdmin(admin.ModelAdmin):
             obj.balance_after_transaction = obj.account.balance 
             
             obj.account.save()
-            send_transaction_email(obj.account.user,obj.amount,"Loan Approval Message",'Transactions/admin_email.html')
+            send_transaction_email(obj.account.user,obj.amount,"Loan Approval Message",'transactions/admin_email.html')
         super().save_model(request,obj,form,change)

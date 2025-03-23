@@ -103,7 +103,7 @@ class WithdrawMoneyView(TransactionCreateMixin):
             update_fields=['balance']
         )
         messages.success(self.request,f"Successfully withdrawn {amount}$ from your account")
-        send_transaction_email(self.request.user,amount,"Withdrawal Message",'Transactions/withdrawal.html')
+        send_transaction_email(self.request.user,amount,"Withdrawal Message",'transactions/withdrawal.html')
         return super().form_valid(form )
     
 
@@ -121,7 +121,7 @@ class LoanRequestView(TransactionCreateMixin):
         if current_loan_count>=3:
             return HttpResponse( "You cannot have more than 3 active loans at a time.")
         messages.success(self.request,f"Loan request for {amount}$ has been sent successfully")
-        send_transaction_email(self.request.user,amount,"Loan Request Message",'Transactions/loan.html')
+        send_transaction_email(self.request.user,amount,"Loan Request Message",'transactions/loan.html')
         return super().form_valid(form )
     
     
