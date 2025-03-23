@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'mamar_bank.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-
+import dj_database_url
 import environ
 env = environ.Env()
 environ.Env.read_env()
@@ -91,17 +91,25 @@ environ.Env.read_env()
 # Your secret key
 SECRET_KEY = env("SECRET_KEY")
 ...
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("DB_NAME"),
+#         'USER': env("DB_USER"),
+#         'PASSWORD': env("DB_PASSWORD"),
+#         'HOST': env("DB_HOST"),
+#         'PORT': env("DB_PORT"),
+#     }
+# }
 
+# Replace the SQLite DATABASES configuration with PostgreSQL:
+DATABASES = {
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://mamar_bank_jkcb_user:5YdP50nakC0nrwKxGfGS1LxTHgXNaziF@dpg-cvg0ah7noe9s73bl7ql0-a.oregon-postgres.render.com/mamar_bank_jkcb',
+        
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

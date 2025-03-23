@@ -23,3 +23,5 @@ setuptools
 sqlparse
 tzdata
 virtualenv
+psycopg2-binary
+dj-database-url
