@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.0.1/dist/tailwind.min.css">
+    <title>{% block head_title %} {% endblock %}</title> 
+    <style>
+        footer {
+            position: fixed !important;
+            bottom: 0 !important;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-indigo-600">
+    <div>
+
+        <!-- this means navbar will be included when base.html is inherited -->
+    {% include 'navbar.html' %}
+    {% include 'messages.html' %}
+    {% block body %}
+    {% endblock %}
+    </div>
+</body>
+</html>
