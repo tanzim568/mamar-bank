@@ -4,7 +4,7 @@
 
 
 
-    <!-- this code is coppied from django gitbook given by phitron -->
+    
 
     {% if form.non_field_errors %} {% for error in form.non_field_errors %}
 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
@@ -17,8 +17,8 @@
     <p class="block sm:inline">{{ error }}</p>
 </div>
 {% endfor %} {% endif %}
-<div class="bg-white px-3 py-4 rounded-xl my-6">
-    <h1 class="font-bold text-3xl text-center pb-5">Sign In</h1>
+<div class="bg-white/75 backdrop-blur-md border border-white/60 shadow-xl px-3 py-4 rounded-3xl my-6">
+    <h1 class="font-bold text-3xl text-center pb-5 text-slate-800">Sign In</h1>
     <div class="w-full mt-10">
         <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             {% csrf_token %} {% for hidden_field in form.hidden_fields %} {{ hidden_field.errors }} {{ hidden_field }} {% endfor %}
@@ -31,14 +31,14 @@
                     <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
                     {% endfor %} {% endif %}
                 </div>
-                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0 mt-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.first_name.id_for_label }}">
                         {{ form.first_name.label }}
                     </label> {{ form.first_name }} {% if form.first_name.errors %} {% for error in form.first_name.errors %}
                     <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
                     {% endfor %} {% endif %}
                 </div>
-                <div class="w-full md:w-1/2 px-3">
+                <div class="w-full md:w-1/2 px-3 mt-3">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.last_name.id_for_label }}">
                         {{ form.last_name.label }}
                     </label> {{ form.last_name }} {% if form.last_name.errors %} {% for error in form.last_name.errors %}

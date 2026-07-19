@@ -1,8 +1,16 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from .constants import GENDER_TYPE,ACCOUNT_TYPE
 from django import forms
 from .models import UserBankAccounts,UserAddress
+
+class LoginForm(AuthenticationForm):
+    error_messages = {
+        **AuthenticationForm.error_messages,
+        'invalid_login': (
+            'Incorrect password try again or register.'
+        ),
+    }
 
 class RegistrationForm(UserCreationForm):# usercreation form ke inherit korechi mane user model er field gulo to form e thakbei sathe nicher additional data ba form field gulao thakbe etia inheritance
     account_type=forms.ChoiceField(choices=ACCOUNT_TYPE)

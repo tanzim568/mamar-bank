@@ -1,23 +1,25 @@
 {% extends 'base.html' %} {% block head_title %}{{ title }}{% endblock %} {% block body %}
 
-<div class="w-full flex mt-5 justify-center ">
-    <div class="bg-white w-5/12 rounded-lg">
+<div class="w-full flex mt-5 justify-center px-4">
+    <div class="bg-white/75 backdrop-blur-md border border-white/60 w-full max-w-xl rounded-3xl shadow-xl">
         {% if title == 'Request For Loan' %}
-<div><a class="font-bold text-blue text-center pb-5 pt-10 px-5" href="{% url 'loan_list' %}">View All Loan List</a></div>
+        <div class="pt-8 px-5 text-center">
+            <a class="font-bold text-blue-900" href="{% url 'loan_list' %}">View All Loan List</a>
+        </div>
         {% endif %}
-        
+
         <h1 class="font-bold text-3xl text-center pb-5 pt-10 px-5">{{ title }}</h1>
-        <form method="post" class="px-8 pt-6 pb-8 mb-4">
+        <form method="post" class="px-5 sm:px-8 pt-6 pb-8 mb-4">
             {% csrf_token %}
-            
+
             <div class="mb-4">
                 {% if title == 'Fund Transfer' %}
-        <div>
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="ac">
-                Account No.
-            </label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" name="receiver_ac" id="ac" type="number" required placeholder="Account Number">
-        </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="ac">
+                        Account No.
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight border rounded-md border-gray-500 focus:outline-none focus:shadow-outline" name="receiver_ac" id="ac" type="number" required placeholder="Account Number">
+                </div>
                 {% endif %}
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
                     Amount
@@ -29,11 +31,10 @@
             {% endfor %} {% endif %}
             <div class="flex w-full justify-center">
                 <button class="bg-blue-900 text-white hover:text-blue-900 hover:bg-white border border-blue-900 font-bold px-4 py-2 rounded-lg" type="submit">
-                Submit
-            </button>
+                    Submit
+                </button>
             </div>
         </form>
     </div>
-    
 </div>
 {% endblock %}

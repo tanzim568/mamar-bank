@@ -20,7 +20,7 @@ def send_transaction_email(user,amount,subject,template):
     message= render_to_string(template,{'user':user,'amount':amount})
     send_email=EmailMultiAlternatives(subject,message,to=[user.email])
     send_email.attach_alternative(message,"text/html")
-    send_email.send()
+    send_email.send(fail_silently=True)
 
 # Create your views here.
 #ei view ke inherit kore amra deposite ,withdraw,loan request er kaj korbo
@@ -81,11 +81,12 @@ class WithdrawMoneyView(TransactionCreateMixin):
     def get_bankrupt_status(self):
         account=self.request.user.account
         last_transaction=Transaction.objects.filter(account=account).order_by('-timestamp').first()
-        # print(last_transaction.bankrupt)
+
+        if last_transaction is None:
+            return False
+
         last_transaction.refresh_from_db()
-        # print(Transaction.objects.values('id', 'bankrupt'))
-        # last_transaction.bankrupt=True
-        return  last_transaction.bankrupt 
+        return last_transaction.bankrupt 
     
     def get_form_kwargs(self):
         kwargs= super().get_form_kwargs()

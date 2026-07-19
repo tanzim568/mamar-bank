@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.views.generic import FormView,View
 from django.contrib.auth.views import LoginView,LogoutView
-from .forms import RegistrationForm,UserUpdateForm
+from .forms import RegistrationForm,UserUpdateForm,LoginForm
 from django.contrib.auth import login,logout
 from django.urls import reverse_lazy
 # Create your views here.
@@ -40,10 +40,11 @@ class UpdateProfileView(View):
 
 class UserLoginView(LoginView):
     template_name='./accounts/user_login.html'
+    form_class = LoginForm
     # success_url=reverse_lazy('homepage')
 
-    def get(self,request):
-        return render(request,'./accounts/user_login.html')
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'form': self.get_form()})
     
     def get_success_url(self):
         return reverse_lazy('homepage')
