@@ -89,25 +89,23 @@ env = environ.Env()
 environ.Env.read_env()
 ...
 # Your secret key
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY", default="django-insecure-dev-key")
 ...
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': env("DB_NAME"),
-#         'USER': env("DB_USER"),
-#         'PASSWORD': env("DB_PASSWORD"),
-#         'HOST': env("DB_HOST"),
-#         'PORT': env("DB_PORT"),
+#         'NAME': env("DB_NAME", default="mamar_bank"),
+#         'USER': env("DB_USER", default=""),
+#         'PASSWORD': env("DB_PASSWORD", default=""),
+#         'HOST': env("DB_HOST", default=""),
+#         'PORT': env("DB_PORT", default=""),
 #     }
 # }
 
-# Replace the SQLite DATABASES configuration with PostgreSQL:
+# Use SQLite by default for local development, while still supporting DATABASE_URL overrides.
 DATABASES = {
     'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://mamar_bank_jkcb_user:5YdP50nakC0nrwKxGfGS1LxTHgXNaziF@dpg-cvg0ah7noe9s73bl7ql0-a.oregon-postgres.render.com/mamar_bank_jkcb',
-        
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
     )
 }
 
@@ -160,5 +158,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env("EMAIL_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
+EMAIL_HOST_USER = env("EMAIL_USER", default="")
+EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD", default="")

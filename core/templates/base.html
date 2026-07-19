@@ -4,23 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.0.1/dist/tailwind.min.css">
-    <title>{% block head_title %} {% endblock %}</title> 
+    <title>{% block head_title %} {% endblock %}</title>
     <style>
+        body {
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at top left, rgba(191, 219, 254, 0.75), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(224, 231, 255, 0.95), transparent 32%),
+                linear-gradient(135deg, #f8fbff 0%, #eef4ff 45%, #f3f6fb 100%);
+            color: #1f2937;
+        }
+
         footer {
             position: fixed !important;
             bottom: 0 !important;
             width: 100%;
         }
+
+        @media (max-width: 768px) {
+            footer {
+                position: static !important;
+            }
+
+            body {
+                padding-bottom: 0;
+            }
+        }
     </style>
 </head>
-<body class="bg-indigo-600">
-    <div>
-
-        <!-- this means navbar will be included when base.html is inherited -->
-    {% include 'navbar.html' %}
-    {% include 'messages.html' %}
-    {% block body %}
-    {% endblock %}
+<body class="min-h-screen">
+    <div class="w-full">
+        {% include 'navbar.html' %}
+        {% include 'messages.html' %}
+        {% block body %}
+        {% endblock %}
     </div>
 </body>
 </html>
